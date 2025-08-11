@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,26 +27,14 @@ public class Controller {
         return "conversation service";
     }
 
-    @GetMapping(path = "user/all")
-    public List<ConversationDTO> getUserConversations() {
-        return service.getConversations("USER");
+    @GetMapping(path = "{permission}/all")
+    public List<ConversationDTO> getConversations(@PathVariable("permission") String permission) {
+        return service.getConversations(permission.toUpperCase());
     }
-
-    @GetMapping(path = "admin/all")
-    public List<ConversationDTO> getAdminConversations() {
-        return service.getConversations("ADMIN");
+    @GetMapping(path = "{permission}/{id}")
+    public Conversation getConversation(@PathVariable("id") Long id, @PathVariable("permission") String permission) {
+        return service.getConversation(id, permission.toUpperCase());
     }
-
-    @GetMapping(path = "user/{id}")
-    public Conversation getUserConversation(@PathVariable("id") Long id) {
-        return service.getConversation(id, "USER");
-    }
-
-    @GetMapping(path = "admin/{id}")
-    public Conversation getAdminConversation(@PathVariable("id") Long id) {
-        return service.getConversation(id, "ADMIN");
-    }
-
     @PostMapping
     public void registerNewStudent(@RequestBody Conversation conversation) {
         service.addNewConversation(conversation);

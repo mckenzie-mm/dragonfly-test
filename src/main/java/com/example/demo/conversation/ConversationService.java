@@ -67,12 +67,12 @@ public class ConversationService {
                     ConversationDTO.fromConversation(obj)
                 ).collect(Collectors.toList());   
 
-        if (permission == "ADMIN") {
+        if (permission.equals("ADMIN")) {
             return listDTO;
         } else {
             // Filter based on permission
             return listDTO.stream()
-            .filter(obj -> obj.getPermission() == "USER").collect(Collectors.toList());          
+            .filter(obj -> obj.getPermission().equals("USER")).collect(Collectors.toList());          
         }
     }
 
@@ -81,10 +81,10 @@ public class ConversationService {
             .filter(obj -> obj.getId() == targetId) // Filter based on ID
             .findFirst().orElse(null); // Get the first matching element
         if (foundConversation != null) {
-            if (permission == "ADMIN") {
+            if (permission.equals("ADMIN")) {
                 return foundConversation;
             }
-            if (foundConversation.getPermission() == permission) {
+            if (foundConversation.getPermission().equals(permission)) {
                 return foundConversation;
             } 
         }
