@@ -1,0 +1,15 @@
+
+// This call should return 3 conversations
+###
+GET http://localhost:8080/api/user/all
+
+###
+GET http://localhost:8080/api/user/1
+
+// This call should fail
+###
+GET http://localhost:8080/api/user/3
+
+// This call should fail
+###
+GET http://localhost:8080/api/user/5

@@ -1,0 +1,28 @@
+
+// This call should return 4 conversations
+###
+GET http://localhost:8080/api/admin/all
+
+###
+GET http://localhost:8080/api/admin/1
+
+// This call should pass
+###
+GET http://localhost:8080/api/admin/3
+
+// This call should fail
+###
+GET http://localhost:8080/api/admin/5
+
+// Add a conversation
+###
+POST http://localhost:8080/api
+Content-Type: application/json
+
+{
+    "title": "title 5",
+    "sentence": "sentence 5",
+    "paragraph": "pragraph 5",
+    "permission": "ADMIN",
+    "edited": "1995-12-17"
+}
